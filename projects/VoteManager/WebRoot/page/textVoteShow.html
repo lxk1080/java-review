@@ -1,0 +1,28 @@
+<div class="row" ng-show="imgFlag">
+	<div class="col-sm-10 col-sm-offset-1">
+		<div class="thumbnail">
+			<img ng-src="{{'img/uploadImg/'+result.img}}" alt="">
+		</div>
+	</div>
+</div>
+<div class="panel panel-info" ng-repeat="ch in result.choose">
+	<div class="panel-heading">
+		<input type="hidden" ng-init="addItem($index,ch.quesText)"> <!--init不会数据绑定，所以只会执行一次，而bind当函数内部数据改变时，会再次执行-->
+		<input type="hidden" ng-bind="chIndex=$index"> <!--用来保存外层循环的索引-->
+		<span>{{ch.quesText}} ?</span>
+	</div>
+	<div class="panel-body row">
+		<div class="container">
+			<div ng-repeat="op in ch.optionArr" class="col-sm-3">
+				<label class="radio-inline" for="{{chIndex + op}}">
+					<element ng-if="isRadio">
+						<input id="{{chIndex + op}}" type="radio" ng-click="changeAns($event)"  name="{{'ques'+chIndex}}" value="{{op}}"> {{op}}
+					</element>
+					<element ng-if="!isRadio">
+						<input id="{{chIndex + op}}" type="checkbox" ng-click="changeAns($event)"  name="{{'ques'+chIndex}}" value="{{op}}"> {{op}}
+					</element>
+				</label>
+			</div>
+		</div>
+	</div>
+</div>

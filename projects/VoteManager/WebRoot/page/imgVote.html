@@ -1,0 +1,105 @@
+<div id="imgBox">
+	<div class="panel panel-primary picPanel">
+		<div class="panel-heading">
+			<span>选择图片</span>
+			<!--<button class="btn btn-default btn-xs pull-right removePic">删除图片</button>-->
+		</div>
+		<div class="panel-body">
+			<input id="txt_file1" type="file" class="file-loading" required>
+			<div class="hr_10"></div>
+			<textarea rows="3" class="form-control" placeholder="可以在这里写下对图片的说明..."></textarea>
+		</div>
+	</div>
+	<div class="panel panel-primary picPanel">
+		<div class="panel-heading">
+			<span>选择图片</span>
+		</div>
+		<div class="panel-body">
+			<input id="txt_file2" type="file" class="file-loading" required>
+			<div class="hr_10"></div>
+			<textarea rows="3" class="form-control" placeholder="可以在这里写下对图片的说明..."></textarea>
+		</div>
+	</div>
+</div>
+<button type="button" class="btn btn-default" id="addPic">添加一个新的图片</button>
+	
+
+<!--文件上传初始化-->
+<script>
+	var FileInputTool = function () {
+		var fileUploadObj = new Object();
+		fileUploadObj.Init = function(ctrlName, uploadUrl) {
+			var control = $('#' + ctrlName);
+			control.fileinput({
+				language: 'zh', //设置语言
+				uploadUrl: uploadUrl, //上传的地址
+				allowedFileExtensions: ['jpg', 'gif', 'png'],//接收的文件后缀
+				uploadAsync: true, //默认异步上传
+				showUpload: false, //是否显示上传按钮
+				showRemove : true, //显示移除按钮
+				showCaption: true,//是否显示标题
+				showPreview : true, //是否显示预览
+				browseClass: "btn btn-primary", //按钮样式 
+				dropZoneEnabled: false,//是否显示拖拽区域
+				autoReplace: true, //是否自动替换当前图片，设置为true时，再次选择文件，会将当前的文件替换掉
+				maxFileCount: 5, //表示允许同时上传的最大文件个数
+				enctype: 'multipart/form-data',
+				validateInitialCount:true,
+				previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+				msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
+				layoutTemplates:{  // 使图片上的上传和删除隐藏，但是可以通过调用class上传或删除
+					actionUpload: '<div class="kv-file-upload"></div>',
+					actionDelete: '<div class="kv-file-remove"></div>'
+				}
+			});
+		}
+		return fileUploadObj;
+	};
+	$(function () {
+		var fit = new FileInputTool();
+		fit.Init("txt_file1", "UploadUrl");
+		fit.Init("txt_file2", "UploadUrl");
+	});
+</script>
+
+<!-- dom CRUD -->
+<script type="text/javascript">
+	$(function(){
+		// 获取添加图片的id
+		function getBeforeFileId(){
+			var fileLen = $("#imgBox").children().length;
+			var fileId = "text_file" + (Number(fileLen) + 1);
+			//alert(fileId)
+			return fileId;
+		}
+		
+		// 创建文件上传初始化对象
+		var fit = new FileInputTool();
+		
+		// 添加图片
+		$("#addPic").click(function(){
+			// 文件上传框由于其file-loading的存在，一加载到页面就会改变dom结构（所以复制的dom是改变后的dom），导致找不到file-loading样式，也就无法给id赋值，
+			// 所以只能以这种字符串的形式，提前设置id的值 ，这样就可以在一加载到页面时就能解析id的值
+			var nowId = getBeforeFileId(); // 这里必须先取值，保证两次获得的id相同（每次调用该方法时，返回值不同）
+			var picPanel = '<div class="panel panel-primary picPanel">'+
+							'<div class="panel-heading">'+
+								'<span>选择图片</span>'+
+								'<button class="btn btn-default btn-xs pull-right removePic">删除选项</button>'+
+							'</div>'+
+							'<div class="panel-body">'+
+								'<input id="'+nowId+'" type="file" class="file-loading" required>'+
+								'<div class="hr_10"></div>'+
+								'<textarea rows="3" class="form-control" placeholder="在这里写下对图片的说明..."></textarea>'+
+							'</div>'+
+						'</div>';
+			// 添加图片
+			$(".picPanel:last").after(picPanel);
+			//  给新的文件上传初始化
+			fit.Init(nowId, "UploadUrl");
+			// 给新添加的按钮绑定删除事件
+			$(".picPanel:last").find(".removePic").click(function(){
+				$(this).parent().parent().remove();
+			})
+		})
+	})
+</script>

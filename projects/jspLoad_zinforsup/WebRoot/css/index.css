@@ -1,0 +1,154 @@
+/* 主页样式 */
+
+/* 页头  */
+.top {
+	width: 780px;
+	height: 202px;
+	margin: 0 auto;
+}
+
+
+
+/* 首页面中左 */
+.user_mid_left {
+	width: 215px;
+	float: left;
+}
+
+/* 广告信息头,快速信息检索头,联系我们  */
+.ad_info_title, .ad_info_serach, .contact_us {
+	width: 215px;
+	height: 30px;
+	background: #ededed;
+	float: left;
+	border-bottom:#999 dotted 2px;
+}
+
+.ad_info_title span, .ad_info_serach span, .contact_us span{
+	margin-left: 10px;
+	margin-top: 5px;
+	display: block; /* span元素想要拥有margin-top,需要转为块元素  */
+}
+
+/* 广告列表  */
+.ad_info_list {
+	width: 215px;
+	height: 230px;
+	background: #fefef6;
+	float: left;
+	line-height: 18px;
+}
+
+.ad_info_list ul {
+	padding-left: 20px;
+	margin-top:10px;
+}
+.ad_info_list ul li {
+	list-style-type: none;
+}
+
+/* 快速信息检索  */
+.info_search{
+	width: 215px;
+	height: 110px;
+	background-image: url("../images/query.gif");
+	float: left;
+}
+.info_search table{
+	margin-top:15px;
+	margin-left:10px;
+	border-spacing:4px;  /* 相当于table的cellspacing属性 */
+}
+
+/* 联系信息  */
+.contact_info{
+	width:215px;
+	height:150px;
+	background: #fefdf8;
+	float:left;
+}
+.contact_info span{
+	margin-top:10px;
+	margin-left:20px;
+	display:block;
+	line-height:30px;
+}
+
+
+
+/* 首页面中右 */
+.user_mid_right{
+	width:563px;
+	float:right;
+	border-left:#f60 solid 1px;
+}
+
+/* 付费专区背景图 */
+.pay_title{
+	width:563px;
+	height:27px;
+	background-image: url("../images/fufei.gif");
+	float:left;
+}
+
+/* 付费信息  */
+.pay_info_con{
+	width:563px;
+	height:120px;
+	background:white;
+	float:left;
+}
+.pay_info_con table{
+	width:540px;
+	margin: 10px auto;
+	border-spacing:12px;
+}
+
+/* <!-- 首页的广告 --> */
+.ad_con{
+	width:563px;
+	height:87px;
+	background: white;
+	float: left;
+}
+.ad_con img{
+	width:563px;
+}
+
+/* 免费专区背景图  */
+.free_title{
+	width:563px;
+	height:27px;
+	background-image: url("../images/mianfei.gif");
+	float:left;
+}
+
+/* 免费信息  */
+.free_info_con{
+	width:563px;
+	height:330px;
+	background:white;
+	float:left;
+}
+.free_info_con table{
+	width:540px;
+	margin: 10px auto;
+	border-spacing:10px;
+}
+
+/* 页码 */
+.pagenavi{
+	float:right;
+	margin-bottom:10px;
+}
+
+/* 页底 */
+.user_bottom{
+	width:780px;
+	height:57px;
+	line-height:57px;
+	text-align: center;
+	background-image: url("../images/bottom_bg.gif");
+	float: left;
+}
+

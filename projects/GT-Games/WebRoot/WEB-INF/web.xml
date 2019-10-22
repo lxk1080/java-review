@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>GT-Games</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <servlet-name>UserServlet</servlet-name>
+    <servlet-class>controller.UserServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>NoteServlet</servlet-name>
+    <servlet-class>controller.NoteServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>SendNote</servlet-name>
+    <servlet-class>controller.SendNote</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>SendNoteServlet</servlet-name>
+    <servlet-class>controller.SendNoteServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>ImageServlet</servlet-name>
+    <servlet-class>controller.ImageServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>CheckCodeServlet</servlet-name>
+    <servlet-class>controller.CheckCodeServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>LoginServlet</servlet-name>
+    <servlet-class>controller.LoginServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>RegisterServlet</servlet-name>
+    <servlet-class>controller.RegisterServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>ShowallnoteServlet</servlet-name>
+    <servlet-class>controller.ShowallnoteServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>SendnoteServlet</servlet-name>
+    <servlet-class>controller.SendnoteServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>AjaxServlet</servlet-name>
+    <servlet-class>controller.AjaxServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>ShowallnoteForuser</servlet-name>
+    <servlet-class>controller.ShowallnoteForuser</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>ReplyServlet</servlet-name>
+    <servlet-class>controller.ReplyServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>ReplyServlet</servlet-name>
+    <url-pattern>/reply</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UserServlet</servlet-name>
+    <url-pattern>/user</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>NoteServlet</servlet-name>
+    <url-pattern>/NoteServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SendNote</servlet-name>
+    <url-pattern>/SendNote</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SendNoteServlet</servlet-name>
+    <url-pattern>/SendNoteServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ImageServlet</servlet-name>
+    <url-pattern>/ImageServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CheckCodeServlet</servlet-name>
+    <url-pattern>/CheckCodeServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>LoginServlet</servlet-name>
+    <url-pattern>/LoginServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>RegisterServlet</servlet-name>
+    <url-pattern>/RegisterServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ShowallnoteServlet</servlet-name>
+    <url-pattern>/ShowallnoteServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SendnoteServlet</servlet-name>
+    <url-pattern>/SendnoteServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AjaxServlet</servlet-name>
+    <url-pattern>/AjaxServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ShowallnoteForuser</servlet-name>
+    <url-pattern>/ShowallnoteForuser</url-pattern>
+  </servlet-mapping>
+</web-app>

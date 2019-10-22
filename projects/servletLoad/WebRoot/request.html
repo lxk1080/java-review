@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>request.html</title>
+	<meta charset="utf-8" />
+    <meta name="keywords" content="keyword1,keyword2,keyword3">
+    <meta name="description" content="this is my page">
+    <meta name="content-type" content="text/html; charset=UTF-8">
+    
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+
+  </head>
+  
+  <body>
+    <a href="/servletLoad/RequestServlet?name=your_username" >点击一下</a><br>
+    <form action="RequestServlet" method="post">
+    <span>选择：</span>
+	    <input type="checkbox" name="war" value="古尔丹" />古尔丹
+	    <input type="checkbox" name="war" value="萨尔" />萨尔
+	    <input type="checkbox" name="war" value="毁灭之锤" />毁灭之锤
+	    <input type="hidden" name="hidden" value="hidden数据">
+	    <input type="submit" value="提交" />
+    </form>
+  </body>
+</html>

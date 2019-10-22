@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-ng-app="appVote">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+		<link rel="stylesheet" type="text/css" href="css/comm.css"/>
+		<link rel="stylesheet/less" type="text/css" href="less/showVote.less"/>
+		<!--[if lt IE 9]>
+			<script src="https://cdn.bootcss.com/html5shiv/r29/html5.min.js"></script>
+		    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+		<title>投票页面</title>
+	</head>
+	<body class="container" data-ng-controller="showVote">
+		<!--navbar-->
+		<div ng-include="'page/navbar.html'"></div>
+		
+		<header class="page-header text-center">
+			<h2>{{result.title}}</h2>
+			<p>{{result.desc}}</p>
+			<p>
+				<span>选择模式：<strong>{{isRadio?'单选':'多选'}}</strong></span>　
+				<span ng-show="!isRadio">下限：<span class="text-danger">{{result.pattern.lowLimit}}</span></span>
+				<span ng-show="!isRadio">上限：<span class="text-danger">{{result.pattern.upLimit}}</span></span>
+			</p>
+			<p>
+				<span>投票发布日期：{{result.pubDate}}</span>　
+				<span>投票截止日期：{{result.expireDate}}</span>
+			</p>
+		</header>
+		
+		<section>
+			<div ng-include="url">
+				...
+			</div>
+			
+			<div class="row">
+				<div class="col-sm-6 col-sm-offset-3">
+					<button type="button" class="btn btn-danger btn-block" ng-show="alertInfo">请先完成所有的选项！</button>
+					<div></div> <!--消除bootstrap自带的多button上边距-->
+					<button type="button" class="btn btn-danger btn-block" ng-show="alertInfo2">注意这是多选！！！你确定每个选项都完成了吗？</button>
+					<div></div> 
+					<button type="button" class="btn btn-danger btn-block" ng-show="errorInfo">您还未投票呢，亲！</button>
+					<div></div> 
+					<button type="button" class="btn btn-danger btn-block" ng-show="errorInfo2">这个，可不是只投一张票那么简单啊！</button>
+					<div></div> 
+					<button type="button" class="btn btn-danger btn-block" ng-show="dateInfo">投票已过期！您来晚了 (。・_・)~~Bye~Bye~！</button>
+					<div></div> 
+					<button type="button" class="btn btn-danger btn-block" ng-show="limitInfo">投票人数已经满了。。看看其他的吧！</button>
+					<div></div> 
+					<button type="button" ng-click="subReply()" ng-show="!alertInfo && !alertInfo2 && !errorInfo && !errorInfo2 && !dateInfo && !limitInfo" class="btn btn-success btn-block">提交</button>
+				</div>
+			</div>
+			
+			<div class="hr_20"></div>
+			<div class="hr_20"></div>
+		</section>
+		
+		<!--alert window-->
+		<button class="btn btn-primary hide" data-toggle="modal" data-target="#divModal" id="modalBtn">弹出按钮</button>
+		<div class="modal fade" id="divModal">
+			<div class="modal-dialog modal-sm">
+				<div class="modal-content">
+					<div class="modal-header">
+						<span>提示信息</span>
+					</div>
+					<div class="modal-body text-center">
+						<span class="text-info"></span>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" data-dismiss="modal">确定</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+		
+		
+		
+		
+		
+		
+		<script type="text/javascript" src="js/jquery-1.9.1.min.js" ></script>
+		<script type="text/javascript" src="js/bootstrap.js" ></script>
+		<script type="text/javascript" src="js/angular-1.4.0.min.js" ></script>
+		<script type="text/javascript" src="js/less.min.js" ></script>
+		<script type="text/javascript" src="js/controller.js" ></script>
+		<script type="text/javascript" src="js/module.js" ></script>
+	</body>
+</html>

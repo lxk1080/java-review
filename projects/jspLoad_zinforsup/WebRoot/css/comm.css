@@ -1,0 +1,70 @@
+/* 通用样式 */
+body{
+	font-size:12px;
+	margin:0 auto;
+	width:780px;
+}
+
+td{
+	font-size:12px;
+}
+
+*{
+	padding:0;
+	margin:0;
+}
+
+/* 定义字体样式  */
+.font_style1{
+	font-weight:bold;
+}
+.font_style2{
+	font-weight:bold;
+	color:#cc0000;
+}
+.font_style3{
+	color:#ff6600;
+}
+.font_style4{
+	color:#d5a7ef;
+}
+.font_style5{
+	color:#3366de;
+	font-weight:bold;
+}
+.font_style6{
+	color:#ff6600;
+	font-weight:bold;
+}
+
+/* 文字缩进 */
+.indent{
+	text-indent:2em;
+}
+
+/* 下划线样式 */
+/* 
+	margin-top:7px;*margin: 0;是解决ie和ff matgin-top不一致的问题；
+	border: 0; 是去掉ff的一条阴影线；
+	color: black; 是设置ie老版本水平线的颜色；
+	background-color: black; 是设置FF下水平线的颜色；
+	height: 1px;是设置水平线的高度，当然你也可以把它设置2px，3px；
+ */
+.under_line{
+	margin-top:7px;
+    *margin: 0;
+    border: 0;
+    color: #cc0000;
+    background-color: #cc0000;
+    height: 2px;
+}
+
+/* 超链接样式 */
+a:link{
+	text-decoration:none
+}
+
+/* input标签的长 */
+.input_width{
+	width:120px;
+}

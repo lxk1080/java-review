@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-cn" data-ng-app="appVote">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+		<link rel="stylesheet" type="text/css" href="css/fileinput.min.css"/>
+		<link rel="stylesheet" type="text/css" href="css/comm.css"/>
+		<!--[if lt IE 9]>
+			<script src="https://cdn.bootcss.com/html5shiv/r29/html5.min.js"></script>
+		    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+		<title>创建投票</title>
+	</head>
+	<body class="container">
+		<!--navbar-->
+		<div ng-include="'page/navbar.html'"></div>
+		
+		<header class="page-header text-center">
+			<h1>新建一个投票事项  <small>create vote</small></h1>
+		</header>
+		
+		<section data-ng-controller="createVote">
+			<!--投票标题--> 										<!--设置提交方式为执行一个函数-->
+			<form class="form-horizontal" id="form" name="form" ng-submit="subForm()" method="post" enctype="multipart/form-data">
+				<div class="form-group has-feedback" ng-class="form.voteTitle.$dirty?(form.voteTitle.$valid?'has-success':'has-error'):''">
+					<label class="control-label col-sm-2" for="voteTitle">投票标题：（20字以内） </label>
+					<div class="col-sm-10">
+						<input class="form-control" id="voteTitle" name="voteTitle" ng-model="voteTitle" type="text" required ng-maxlength="20">
+						<span ng-show="form.voteTitle.$dirty && form.voteTitle.$valid" ng-class="'glyphicon-ok'" class="glyphicon form-control-feedback"></span>
+						<span ng-show="form.voteTitle.$dirty && form.voteTitle.$invalid" ng-class="'glyphicon-remove'" class="glyphicon form-control-feedback"></span>
+					</div>
+				</div>
+				<!--简介-->
+				<div class="form-group has-feedback" ng-class="form.desc.$dirty?(form.desc.$valid?'has-success':'has-error'):''">
+					<label class="control-label col-sm-2" for="desc">简介：（100字以内） </label>
+					<div class="col-sm-10">
+						<textarea rows="3" class="form-control" id="desc" name="desc" ng-model="desc" type="text" required ng-maxlength="100"></textarea>
+						<span ng-show="form.desc.$dirty && form.desc.$valid" ng-class="'glyphicon-ok'" class="glyphicon form-control-feedback"></span>
+						<span ng-show="form.desc.$dirty && form.desc.$invalid" ng-class="'glyphicon-remove'" class="glyphicon form-control-feedback"></span>
+					</div>
+				</div>
+				
+				<!--选项卡-->
+				<ul class="nav nav-tabs" id="nav">
+					<!--文字投票-->
+					<li class="active">
+						<a data-url="{{urlObj[0].url}}" ng-click="changeUrl(urlObj[0].url)" data-toggle="tab">{{urlObj[0].title}}</a>
+					</li>
+					<!--图片投票-->
+					<li>
+						<a data-url="{{urlObj[1].url}}" ng-click="changeUrl(urlObj[1].url)" data-toggle="tab">{{urlObj[1].title}}</a>
+					</li>
+				</ul>
+				<div class="hr_15"></div>
+				<div ng-include="url" id="tabUrl">
+					分支内容 ...
+				</div>
+				
+				
+				<!--其他选项-->
+				<div class="hr_20"></div>
+				<!--投票模式-->
+				<div class="panel panel-info">
+					<div class="panel-heading">
+						<span>投票模式选择</span>
+					</div>
+					<div class="panel-body">
+						<div class="row" style="line-height: 35px;">
+							<div class="col-sm-2 col-sm-offset-1">
+								<input type="radio" id="singChoose" name="pattern" ng-checked="chooseFlag" ng-click="chooseFunc($event)">
+								<label for="singChoose">单项选择</label>
+							</div>
+							<div class="col-sm-6">
+								<div class="row">
+									<div class="col-sm-3">
+										<input type="radio" id="multiChoose" name="pattern" ng-checked="!chooseFlag" ng-click="chooseFunc($event)"> 
+										<label for="multiChoose">多项选择</label>
+									</div>
+									<div class="col-sm-8">
+										<div class="input-group multiInput">
+											<div class="input-group-addon">下限</div>
+											<input type="number" class="form-control" ng-model="lowLimit" ng-blur="llFunc()" disabled>
+											<div class="input-group-addon">上限</div>
+											<input type="number" class="form-control" ng-model="upLimit" ng-blur="ulFunc()" disabled>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			
+				<!--投票人数限制-->
+				<nav class="navbar navbar-default" style="border: none;">
+					<div class="container-fluid">
+						<div class="navbar-header">
+							<div class="navbar-brand">
+								<span class="label label-info">投票人数限制</span>
+							</div>
+							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#divNav">
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
+						</div>
+						<div class="collapse navbar-collapse" id="divNav">
+							<ul class="nav navbar-nav" style="line-height: 0;">
+								<li class="navbar-text">
+									<input type="radio" id="unlimited" name="peopleNum" ng-checked="limitFlag" ng-click="chooseFunc($event)"> 
+									<label for="unlimited">不限</label>
+								</li>
+								<li class="navbar-text">
+									<input type="radio" id="custom" name="peopleNum" ng-check="!limitFlag" ng-click="chooseFunc($event)"> 
+									<label for="custom">自定义</label>
+								</li>
+								<li class="navbar-btn">
+									<input type="number" class="form-control" placeholder="最多投票人数限制" ng-model="peoLimit" ng-blur="plFunc()" disabled>
+								</li>
+							</ul>	
+						</div>
+					</div>
+				</nav>
+			
+				<!--发布与截止日期-->
+				<nav class="navbar navbar-default" style="border: none;">
+					<div class="container-fluid">
+						<!--发布日期-->
+						<div class="navbar-header">
+							<div class="navbar-brand">
+								<span class="label label-info">发布日期</span>
+							</div>
+						</div>
+						<div class="collapse navbar-collapse in">
+							<ul class="nav navbar-nav">
+								<li class="navbar-btn">
+									<input type="date" class="form-control" id="pubDate" ng-model="pubDate" required>
+								</li>
+							</ul>
+						</div>
+						<!--截止日期-->
+						<div class="navbar-header">
+							<div class="navbar-brand">
+								<span class="label label-info">截止日期</span>
+							</div>
+						</div>
+						<div class="collapse navbar-collapse in">
+							<ul class="nav navbar-nav">
+								<li class="navbar-btn">
+									<input type="date" class="form-control" id="expireDate" ng-model="expireDate" ng-blur="edFunc()" required>
+								</li>
+							</ul>	
+						</div>
+					</div>
+				</nav>
+				
+				<!--提交-->
+				<div class="hr_20"></div>
+				<div class="row">
+					<div class="col-md-6 col-md-offset-3">
+						<button type="submit" ng-disabled="form.$invalid" class="btn btn-danger btn-block btn-lg">创 建 投 票</button>
+					</div>
+				</div>
+				
+				<div class="hr_20"></div>
+				<div class="hr_20"></div>
+			</form>
+			
+			<!--弹出窗口-->
+			<button class="btn btn-primary hide" data-toggle="modal" data-target="#divModal" id="modalBtn">弹出按钮</button>
+			<div class="modal fade" id="divModal">
+				<div class="modal-dialog modal-sm">
+					<div class="modal-content">
+						<div class="modal-header">
+							<span>提示信息</span>
+						</div>
+						<div class="modal-body text-center">
+							<span class="text-info"></span>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-danger confirm" data-dismiss="modal">确定</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			
+		</section>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<script type="text/javascript" src="js/jquery-1.9.1.min.js" ></script>
+		<script type="text/javascript" src="js/bootstrap.js" ></script>
+		<script type="text/javascript" src="js/angular-1.4.0.min.js" ></script>
+		<script type="text/javascript" src="js/DateUtils.js" ></script>
+		<script type="text/javascript" src="js/controller.js" ></script>
+		<script type="text/javascript" src="js/module.js" ></script>
+		<script type="text/javascript" src="js/fileinput.js" ></script>
+		<script type="text/javascript" src="js/fileinput-locales.js" ></script>
+	</body>
+</html>

@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN" "http://java.sun.com/dtd/web-app_2_3.dtd">
+<web-app>
+
+  <!-- 这里配置的参数信息能被所有servlet读取 -->
+  <context-param>
+  	<param-name>version</param-name>
+  	<param-value>1.0</param-value>
+  </context-param> 
+  
+  <!-- 过滤器 -->
+  <!-- <filter>
+  	<filter-name>FilterServlet</filter-name>
+  	<filter-class>com.etc.filter.FilterServlet</filter-class>
+  </filter>
+  <filter-mapping>
+	<filter-name>FilterServlet</filter-name>
+	<url-pattern>/*</url-pattern>  表示对该WEB的所有网页都过滤 
+  </filter-mapping> -->
+
+
+  <!-- 根据servlet规范，需要将servlet部署到web.xml文件  -->
+  <servlet>
+  	<!-- servlet的注册名，名字可以自定义，默认是servlet名  -->
+    <servlet-name>MyFirstServlet</servlet-name>
+    <!-- 指明servlet在哪个包下（全路径 包名+类名） -->
+    <servlet-class>com.etc.servlet.MyFirstServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>MyGenericServlet</servlet-name>
+    <servlet-class>com.etc.servlet.MyGenericServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>MyHttpServlet</servlet-name>
+    <servlet-class>com.etc.servlet.MyHttpServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>  <!-- 在项目启动时就创建servlet实例，1代表该servlet被创建的顺序 -->
+    <!-- <load-on-startup>2</load-on-startup> --> <!-- 这个就代表第二个被调用 -->
+  </servlet>
+  <servlet>
+    <servlet-name>ServConfig</servlet-name>
+    <servlet-class>com.etc.servlet.ServConfig</servlet-class>
+    <!-- 给servlet配置参数信息，这里的信息只能被该servlet读取 -->
+    <init-param>
+    	<param-name>encoding</param-name>
+    	<param-value>utf-8</param-value>
+    </init-param>
+    <init-param>
+    	<param-name>author</param-name>    	
+    	<param-value>your_username</param-value>
+    </init-param>
+    <init-param>
+    	<param-name>version</param-name>
+    	<param-value>2.0</param-value>
+    </init-param>
+  </servlet>
+  <servlet>
+    <servlet-name>RequestServlet</servlet-name>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <description>This is the description of my J2EE component</description>
+    <servlet-class>com.etc.servlet.RequestServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>ResponseServlet</servlet-name>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <description>This is the description of my J2EE component</description>
+    <servlet-class>com.etc.servlet.ResponseServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>DownloadServlet</servlet-name>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <description>This is the description of my J2EE component</description>
+    <servlet-class>com.etc.download.DownloadServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>CodeServlet</servlet-name>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <description>This is the description of my J2EE component</description>
+    <servlet-class>com.etc.messyCode.CodeServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>CookieServlet</servlet-name>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <description>This is the description of my J2EE component</description>
+    <servlet-class>com.etc.cookie.CookieServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>ReadCookie</servlet-name>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <description>This is the description of my J2EE component</description>
+    <servlet-class>com.etc.cookie.ReadCookie</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>LastTimeCookie</servlet-name>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <description>This is the description of my J2EE component</description>
+    <servlet-class>com.etc.cookie.LastTimeCookie</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>SessionServlet</servlet-name>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <description>This is the description of my J2EE component</description>
+    <servlet-class>com.etc.session.SessionServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>CookieSession</servlet-name>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <description>This is the description of my J2EE component</description>
+    <servlet-class>com.etc.session.CookieSession</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>ServContext</servlet-name>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <description>This is the description of my J2EE component</description>
+    <servlet-class>com.etc.servlet.ServContext</servlet-class>
+  </servlet>
+
+
+
+
+
+
+
+
+  <!-- servlet映射  -->
+  <servlet-mapping>
+  	<!-- 这个servlet名要和上面的名字一样 -->
+    <servlet-name>MyFirstServlet</servlet-name>
+    <!-- 资源名（访问路径） -->
+    <url-pattern>/MyFirstServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>MyGenericServlet</servlet-name>
+    <url-pattern>/MyGenericServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>MyHttpServlet</servlet-name>
+    <url-pattern>/MyHttpServlet</url-pattern>
+  </servlet-mapping>
+  
+  <!-- 一个servlet可以被多次映射  -->
+  <!-- <servlet-mapping>
+  	<servlet-name>MyHttpServlet</servlet-name>
+  	<url-pattern>/MHS.html</url-pattern>   假的html文件
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>MyHttpServlet</servlet-name>
+  	<url-pattern>/*</url-pattern>   所有路径，存在优先级问题，如果访问路径找不到，就访问这个servlet
+  	<url-pattern>/news/*</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>MyHttpServlet</servlet-name>
+  	<url-pattern>*.do</url-pattern>   *号代表任意字符串，此种匹配方式优先级最低
+  </servlet-mapping> -->
+  <servlet-mapping>
+    <servlet-name>ServConfig</servlet-name>
+    <url-pattern>/ServConfig</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>RequestServlet</servlet-name>
+    <url-pattern>/RequestServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ResponseServlet</servlet-name>
+    <url-pattern>/ResponseServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>DownloadServlet</servlet-name>
+    <url-pattern>/DownloadServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CodeServlet</servlet-name>
+    <url-pattern>/CodeServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CookieServlet</servlet-name>
+    <url-pattern>/CookieServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ReadCookie</servlet-name>
+    <url-pattern>/ReadCookie</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>LastTimeCookie</servlet-name>
+    <url-pattern>/LastTimeCookie</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SessionServlet</servlet-name>
+    <url-pattern>/SessionServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CookieSession</servlet-name>
+    <url-pattern>/CookieSession</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ServContext</servlet-name>
+    <url-pattern>/ServContext</url-pattern>
+  </servlet-mapping>
+  
+  <!-- 设置session的生命周期 -->
+  <session-config>
+  	<session-timeout>30</session-timeout>  <!-- session精确到分钟,cookie精确到秒 -->
+  </session-config>
+  
+  <!-- 起始页 -->
+  <welcome-file-list>
+  	<welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+  
+</web-app>

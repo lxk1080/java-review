@@ -1,0 +1,2 @@
+className=com.etc.reflects.Entity_Student
+methodName=love

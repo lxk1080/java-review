@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>download.html</title>
+	<meta charset="utf-8" />
+    <meta name="keywords" content="keyword1,keyword2,keyword3">
+    <meta name="description" content="this is my page">
+    <meta name="content-type" content="text/html; charset=UTF-8">
+    
+    <style>
+    	*{padding:20px}
+    	img{width:200px;}
+    </style>
+
+  </head>
+  
+  <body>
+    <div>
+    	<img src="images/01.jpg">
+    	<a href="DownloadServlet?fileName=电脑.jpg&num=01">download</a>
+    </div>
+    <div>
+    	<img src="images/02.jpg">
+    	<a href="DownloadServlet?fileName=最终幻想.jpg&num=02">download</a>
+    </div>
+    <div>
+    	<img src="images/03.jpg">
+    	<a href="DownloadServlet?fileName=孤岛危机.jpg&num=03">download</a>
+    </div>
+    <div>
+    	<img src="images/04.jpg">
+    	<a href="DownloadServlet?fileName=湖水.jpg&num=04">download</a>
+    </div>
+  </body>
+</html>
+<script>
+	/* var arr = document.getElementsByTagName("img");
+	for(var i = 0; i < arr.length; i++){
+		var src = arr[i].getAttribute("src");
+		var fileName = src.substr(7);
+		var num = src.substr(7,2);
+		console.log(fileName);
+		console.log(num);
+		arr[i].nextSibling.nextSibling.setAttribute("href","DownloadServlet?fileName="+fileName+"&num="+num);
+	} */
+	
+</script>

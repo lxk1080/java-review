@@ -1,0 +1,154 @@
+<!--上传图片-->
+<div class="panel">
+	<div class="panel-heading">
+		<span class="alert alert-info">您可以选择一张简介图片：</span>
+	</div>
+	<div class="panel-body">
+		<input id="input-id" type="file" class="file" name="input-name" data-preview-file-type="text">
+	</div>
+</div>
+<!--问题面板-->
+<div class="panel-group" id="acconding">
+	<div class="panel panel-danger quesPanel">
+		<div class="panel-heading" data-target="#divP1" data-toggle="collapse" data-parent="#acconding"> <!--去掉data-parent便可以使各个panel互不关联-->
+		 	<div class="form-group has-feedback navbar-btn">
+				<label class="control-label col-sm-1">问题：</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control question"  placeholder="请输入问题内容..." required>
+					<span class="form-control-feedback glyphicon glyphicon-question-sign"></span>
+				</div>
+				<!--
+				<div class="col-sm-1">
+					<button type="button" class="btn btn-default removeQues">删除问题</button>
+				</div>
+				-->
+			</div>
+		</div>
+		<div class="collapse panel-collapse" id="divP1">
+			<div class="panel-body optionBox">
+			 	<div class="form-group">
+			 		<label class="control-label col-sm-2">选项</label>
+			 		<div class="col-sm-8">
+			 			<input type="text" class="form-control" placeholder="选项内容" required>
+			 		</div>
+			 	</div>
+			 	<div class="form-group">
+			 		<label class="control-label col-sm-2">选项</label>
+			 		<div class="col-sm-8">
+			 			<input type="text" class="form-control" placeholder="选项内容" required>
+			 		</div>
+			 		<!--
+			 		<div style="line-height: 32px;">
+			 			<button type="button" class="btn btn-warning btn-sm removeOpt">
+			 				<span class="glyphicon glyphicon-remove"></span>
+			 				删除选项
+			 			</button>
+			 		</div>
+			 		-->
+			 	</div>
+			</div>
+			<div class="panel-footer text-right" style="border-top: #ddd solid 1px;">
+			 	<button type="button" class="btn btn-default addOption">添加选项</button>
+			</div>
+		</div>
+	</div>
+</div>
+<button type="button" class="btn btn-default" id="addQuestion">添加一个新的问题</button>
+
+<!--DOM CRUD-->
+<script type="text/javascript">
+	$(function(){
+		// 阻止向下捕捉事件（只阻止了第一个）
+		/*$("input.question").click(function(){
+			return false;
+		})*/
+		
+		// 添加选项（方法）
+		function addOptionFunc(target){
+			var optionHtml = '<div class="form-group">'+
+						 		'<label class="control-label col-sm-2">选项</label>'+
+						 		'<div class="col-sm-8">'+
+						 			'<input type="text" class="form-control" placeholder="选项内容" required>'+
+						 		'</div>'+
+						 		'<div style="line-height: 32px;">'+
+						 			'<button type="button" class="btn btn-warning btn-sm removeOpt"><span class="glyphicon glyphicon-remove"></span> 删除选项</button>'+
+						 		'</div>'+
+						 	 '</div>';
+			$(target).parent().prev().append(optionHtml);
+			// 绑定删除选项事件
+			$(target).parent().prev().children().last().find(".removeOpt").click(function(){
+				$(this).parent().parent().remove();
+			})
+		}
+		
+		// 添加选项（这个事件只针对于已存在的按钮，动态添加的按钮需要在添加的时候额外绑定click事件）
+		$(".addOption").click('click',function(){
+			addOptionFunc($(this));
+		})
+		
+		// 给每个动态添加的问题面板设置不同的#id（方法）
+		function getPanId(){
+			var panLen = $("#acconding").children().length;
+			var panId = "divP" + Number(panLen);
+			return panId;
+		}
+		
+		// 添加问题
+		var quesPanelClone = $(".quesPanel").clone();
+		quesPanelClone.find(".panel-heading").find(".form-group").append('<button type="button" class="btn btn-default removeQues">删除问题</button>');
+		var cloneHtml = quesPanelClone.html();
+		var quesPanel = '<div class="panel panel-danger quesPanel">'+cloneHtml+'</div>';
+		$("#addQuestion").click(function(){
+			// 在最后一个后面追加
+			$(".quesPanel:last").after(quesPanel);
+			// 此时追加的那个变成了最后一个，设置折叠的#id
+			$(".quesPanel:last").find(".panel-heading").attr("data-target","#"+getPanId());
+			$(".quesPanel:last").find(".panel-collapse").attr("id",getPanId());
+			// 绑定删除问题事件
+			$(".quesPanel:last").find(".removeQues").click(function(){
+				$(this).parent().parent().parent().remove();
+			})
+			// 由于这个问题是动态添加的，所以需要额外绑定添加选项事件
+			$(".quesPanel:last").find(".addOption").click(function(){
+				addOptionFunc($(this));
+			})
+		})
+		
+	});
+	
+</script>
+
+<!--文件上传初始化-->
+<script>
+	var FileInputTool = function () {
+		var fileUploadObj = new Object();
+		fileUploadObj.Init = function(ctrlName, uploadUrl) {
+			var control = $('#' + ctrlName);
+			control.fileinput({
+				language: 'zh', //设置语言
+				uploadUrl: uploadUrl, //上传的地址
+				allowedFileExtensions: ['jpg', 'gif', 'png'],//接收的文件后缀
+				uploadAsync: true, //默认异步上传
+				showUpload: false, //是否显示上传按钮
+				showRemove : true, //显示移除按钮
+				showCaption: true,//是否显示标题
+				showPreview : true, //是否显示预览
+				browseClass: "btn btn-primary", //按钮样式 
+				dropZoneEnabled: false,//是否显示拖拽区域
+				autoReplace: true, //是否自动替换当前图片，设置为true时，再次选择文件，会将当前的文件替换掉
+				maxFileCount: 5, //表示允许同时上传的最大文件个数
+				enctype: 'multipart/form-data',
+				validateInitialCount:true,
+				previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+				msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
+				layoutTemplates:{  // 使图片上的上传和删除隐藏，但是可以通过调用class上传或删除
+					actionUpload: '<div class="kv-file-upload"></div>',
+					actionDelete: '<div class="kv-file-remove"></div>'
+				}
+			});
+		}
+		return fileUploadObj;
+	};
+	var fit = new FileInputTool();
+	fit.Init("input-id", "UploadUrl");
+</script>

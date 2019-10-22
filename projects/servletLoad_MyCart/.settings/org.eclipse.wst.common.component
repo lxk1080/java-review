@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="servletLoad_MyCart">
+        <wb-resource deploy-path="/" source-path="/WebRoot" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <property name="context-root" value="servletLoad_MyCart"/>
+        <property name="java-output-path" value="/servletLoad_MyCart/WebRoot/WEB-INF/classes"/>
+    </wb-module>
+</project-modules>

@@ -1,0 +1,18 @@
+<div class="row">
+	<div class="col-sm-6 imgBox" ng-repeat="item in result.choose">
+		<div class="row">
+			<div class="col-sm-10 col-sm-offset-1">
+				<div class="thumbnail">
+					<img ng-src="{{'img/uploadImg/'+item.img}}" alt="" title="{{item.img}}">
+					<div class="caption">
+						<p ng-bind="item.desc"></p>
+						<button class="btn btn-info" type="button" ng-click="changeImg($event)">
+							<i class="glyphicon glyphicon-flag"></i> 投票
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="hr_20"></div>
+	</div>
+</div>

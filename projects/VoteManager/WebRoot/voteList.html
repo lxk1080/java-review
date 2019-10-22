@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-cn" data-ng-app="appVote">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+		<link rel="stylesheet" type="text/css" href="css/comm.css"/>
+		<!--[if lt IE 9]>
+			<script src="https://cdn.bootcss.com/html5shiv/r29/html5.min.js"></script>
+		    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+		<title>参与投票</title>
+	</head>
+	<body class="container">
+		<!--navbar-->
+		<div ng-include="'page/navbar.html'"></div>
+		
+		<header class="page-header text-center" style="margin-bottom: 0;">
+			<h1>全部条目 <small>voteList</small></h1>
+		</header>
+		
+		<section data-ng-controller="voteList">
+			
+			<div class="navbar" style="margin-bottom: 0;">
+				<form class="navbar-form">
+					<div class="input-group">
+						<input type="search" class="form-control" ng-model="searchKey" placeholder="搜你想搜...">
+						<div class="input-group-btn">
+							<button class="btn btn-default" type="button">
+								<span class="glyphicon glyphicon-search"></span>
+							</button>
+						</div>
+					</div>
+				</form>
+			</div>
+			
+			<div class="panel panel-danger">
+				<div class="panel-heading">
+					<div class="row">
+						<div class="col-xs-6">栏目标题</div>
+						<div class="col-xs-3">参与人数</div>
+						<div class="col-xs-3">截止日期</div>
+					</div>
+				</div>
+				<ul class="panel-body list-group">
+					<li class="list-group-item" data-ng-repeat="item in result | filter: searchKey">
+						<div class="row" >
+							<div class="col-xs-6"><a href="showVote.html?vote_type={{item.type}}&vote_id={{item.id}}">{{item.title}}</a></div>
+							<div class="col-xs-3"><code>{{item.votedNum}}</code> / <code>{{getPeopleNum(item.peopleNum)}}</code></div>
+							<div class="col-xs-3">
+								<span class="text-warning" ng-show="(nowDate < getExpireDate(item.expireDate))"><time>{{item.expireDate}}</time></span>
+								<span class="text-danger" ng-show="(nowDate > getExpireDate(item.expireDate))">已过期</span>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+			
+			
+		</section>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<script type="text/javascript" src="js/jquery-1.9.1.min.js" ></script>
+		<script type="text/javascript" src="js/bootstrap.min.js" ></script>
+		<script type="text/javascript" src="js/angular-1.4.0.min.js" ></script>
+		<script type="text/javascript" src="js/ngAjax.js" ></script>
+		<script type="text/javascript" src="js/controller.js" ></script>
+		<script type="text/javascript" src="js/module.js" ></script>
+	</body>
+</html>
